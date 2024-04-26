@@ -1,0 +1,88 @@
+/*
+* Color Palette generated with help of coolors.co.
+* https://coolors.co/28262c-998fc7-d4c2fc-f9f5ff-14248a
+* #0D1321 Rich Black
+* #1D2D44 Prussian Blue
+* #3E5C76 Payne's gray
+* #748CAB Silver Lake Blue
+* #F0EBD8 Egg Shell [Use for font]
+* #FFF White
+*/
+
+body {
+    margin: 0;
+    font-family: Roboto, sans-serif;
+    color: #F0EBD8;
+}
+
+header {
+    background: #0D1321;
+    font-weight: 300;
+    padding: 5px;
+    border-bottom: 0px solid #0D1321; /*No idea why a border is needed so the background is colored correctly.*/
+    margin: 0;
+}
+
+main {
+    margin: 0;
+    height: auto;
+    padding: 10px;
+}
+
+.games-container {
+    padding: 0 10rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.game-card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1D2D44;
+    color: #F0EBD8;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #748CAB;
+    width: 250px;
+    height: 250px;
+}
+
+.game-thumbnail {
+    width: 95%;
+    height: 90%;
+    object-fit: cover;
+    border-radius: 1%;
+}
+
+.game-title {
+    height:10%;
+    width: 95%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.game-description {
+    width: 250px;
+    display: none;
+    background-color: #1D2D44;
+    z-index: 2;
+}
+    
+.game-card:hover + .game-description {
+    display: block;
+}
+
+footer {
+    position:fixed;
+    background-color: #0D1321;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 0;
+    width: 100%;
+}
