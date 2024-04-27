@@ -43,7 +43,7 @@ main {
     align-items: center;
     background-color: #1D2D44;
     color: #F0EBD8;
-    padding: 10px;
+    padding: 20px 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px #748CAB;
     width: 250px;
@@ -55,10 +55,13 @@ main {
     height: 90%;
     object-fit: cover;
     border-radius: 1%;
+    border: 2px solid #0D1321;
+    box-shadow: 0 0 10px #3E5C76;
+    margin-bottom: 10px;
 }
 
 .game-title {
-    height:10%;
+    height: 10%;
     width: 95%;
     font-size: 1.5rem;
     font-weight: 700;
@@ -66,18 +69,27 @@ main {
 }
 
 .game-description {
+    visibility: hidden;
     width: 250px;
-    display: none;
-    background-color: #1D2D44;
-    z-index: 2;
-}
-    
-.game-card:hover + .game-description {
-    display: block;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: rgba(29, 45, 68, 0.5);
+
+    position: absolute;
+    z-index: 1;
 }
 
+.game-card:hover + .game-description {
+    visibility: visible;
+}
+
+a{
+    text-decoration: none;
+    color: #F0EBD8;
+}
 footer {
-    position:fixed;
+    position: fixed;
+    margin-top: 5rem;
     background-color: #0D1321;
     color: #fff;
     display: flex;
