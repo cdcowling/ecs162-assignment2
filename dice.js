@@ -3,8 +3,6 @@ document.addEventListener("DOMContentLoaded", function(event){
     let button = document.getElementById("rollDiceButton");
     let resultText = document.getElementById("diceResult");
 
-    console.log(button.innerHTML);
-    console.log(resultText.innerHTML);
     function rollDice() {
         var diceResult = Math.floor(Math.random() * 6) + 1;
         switch (diceResult) {
