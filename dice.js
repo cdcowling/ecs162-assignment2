@@ -1,9 +1,20 @@
+"use strict";
 document.addEventListener("DOMContentLoaded", function(event){
     let diceImage = document.getElementById("diceDisplayed");
     let button = document.getElementById("rollDiceButton");
     let resultText = document.getElementById("diceResult");
 
-    function rollDice() {
+    async function rollDice() {
+        diceImage.src = 'games-media/dice-media/dice-six-faces-one.png'
+        await new Promise(r => setTimeout(r, 100));
+        diceImage.src = 'games-media/dice-media/dice-six-faces-three.png'
+        await new Promise(r => setTimeout(r, 100));
+        diceImage.src = 'games-media/dice-media/dice-six-faces-six.png'
+        await new Promise(r => setTimeout(r, 100));
+        diceImage.src = 'games-media/dice-media/dice-six-faces-five.png'
+        await new Promise(r => setTimeout(r, 100));
+        diceImage.src = 'games-media/dice-media/dice-six-faces-two.png'
+
         var diceResult = Math.floor(Math.random() * 6) + 1;
         switch (diceResult) {
             case 1:
