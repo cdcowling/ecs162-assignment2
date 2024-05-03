@@ -46,8 +46,9 @@ main {
     padding: 20px 10px;
     border-radius: 10px;
     box-shadow: 0 0 10px #748CAB;
-    width: 250px;
-    height: 250px;
+    width: 275px;
+    height: 275px;
+    margin-top: 20px;
 }
 
 .game-thumbnail {
