@@ -42,13 +42,13 @@ const controls = document.createElement('p');
 
 // The <big> is deprecated, but supported in all browsers, and makes the flags
 // slightly bigger without needing to use 'font-size' CSS
-const flagCountElement = document.createElement('big');
+const flagCountElement = document.createElement('h4');
 
 // Button used to restart the game and display win condition 🙂/😵/🤩
 const restartButton = document.createElement('button');
 
 // Game Map element that contains the buttons
-const m = document.createElement('p');
+const mineArray = document.createElement('p');
 
 const start = () => {
   // numBombs is decremented when adding bombs, so needs to be reset on start()
@@ -61,7 +61,7 @@ const start = () => {
   restartButton.innerHTML = '🙂';
 
   // Clear any existing button elements from the game map
-  m.innerHTML = '';
+  mineArray.innerHTML = '';
 
   // Create new cells (button elements)
   for (let i = 0; i < width * height; i++) {
@@ -73,16 +73,16 @@ const start = () => {
 
     // Cell Value, i.e. the number of adjacent bombs (9+ if the cell is a bomb)
     button.v = 0;
-    m.append(button);
+    mineArray.append(button);
   }
 
   const addBomb = () => {
     const index = ~~(Math.random() * width * height); // ~~ as Math.floor() for +numbers
 
-    if (m.children[index].v) {
+    if (mineArray.children[index].v) {
       addBomb();
     } else {
-      m.children[index].v = 9;
+      mineArray.children[index].v = 9;
     }
   }
 
@@ -93,16 +93,16 @@ const start = () => {
   }
 
   // Look at each cells adjacent cells and increment if there's a bomb nearby
-  for (let i = 0; i < width * height; i++) {                                                         //  x, y
-     i      % width && m.children[i % width + width * (~~(i / width) - 1) - 1]?.v > 8 && m.children[i].v++; // -1,-1
-                   m.children[i % width + width * (~~(i / width) - 1)    ]?.v > 8 && m.children[i].v++; //  0,-1
-    (i + 1) % width && m.children[i % width + width * (~~(i / width) - 1) + 1]?.v > 8 && m.children[i].v++; // +1,-1
-     i      % width && m.children[i % width + width *  ~~(i / width)      - 1]?.v > 8 && m.children[i].v++; // -1, 0
-    //                                                                                      //  0, 0
-    (i + 1) % width && m.children[i % width + width *  ~~(i / width)      + 1]?.v > 8 && m.children[i].v++; // +1, 0
-     i      % width && m.children[i % width + width * (~~(i / width) + 1) - 1]?.v > 8 && m.children[i].v++; // -1,+1
-                   m.children[i % width + width * (~~(i / width) + 1)    ]?.v > 8 && m.children[i].v++; //  0,+1
-    (i + 1) % width && m.children[i % width + width * (~~(i / width) + 1) + 1]?.v > 8 && m.children[i].v++; // +1,+1
+  for (let i = 0; i < width * height; i++) {                                                                                //  x, y
+     i      % width && mineArray.children[i % width + width * (~~(i / width) - 1) - 1]?.v > 8 && mineArray.children[i].v++; // -1,-1
+                       mineArray.children[i % width + width * (~~(i / width) - 1)    ]?.v > 8 && mineArray.children[i].v++; //  0,-1
+    (i + 1) % width && mineArray.children[i % width + width * (~~(i / width) - 1) + 1]?.v > 8 && mineArray.children[i].v++; // +1,-1
+     i      % width && mineArray.children[i % width + width *  ~~(i / width)      - 1]?.v > 8 && mineArray.children[i].v++; // -1, 0
+    //                                                                                                                      //  0, 0
+    (i + 1) % width && mineArray.children[i % width + width *  ~~(i / width)      + 1]?.v > 8 && mineArray.children[i].v++; // +1, 0
+     i      % width && mineArray.children[i % width + width * (~~(i / width) + 1) - 1]?.v > 8 && mineArray.children[i].v++; // -1,+1
+                       mineArray.children[i % width + width * (~~(i / width) + 1)    ]?.v > 8 && mineArray.children[i].v++; //  0,+1
+    (i + 1) % width && mineArray.children[i % width + width * (~~(i / width) + 1) + 1]?.v > 8 && mineArray.children[i].v++; // +1,+1
   }
 
   // Set text color for each cell. Must be done even for bomb cells, as setting
@@ -110,9 +110,8 @@ const start = () => {
   // even applies to emojis like the bomb)
   for (let i = 0; i < width * height; i++) {
     // Dodgy margin saves 1B 'cause all our cssText strings start with `margin`
-    m.children[i].style.cssText = `
-      margin:;
-      color: lch(45 99 ${m.children[i].v ** 1.1 * 225});
+    mineArray.children[i].style.cssText = `
+      color: lch(45 99 ${mineArray.children[i].v ** 1.1 * 225});
     `;
   }
 }
@@ -121,9 +120,9 @@ const checkIfWon = () => {
   for (let i = 0; i < width * height; i++) {
     if (
       // A cell with a bomb, that hasn't been flagged yet:
-      (m.children[i].v > 8 && m.children[i].innerHTML !== '🚩') ||
+      (mineArray.children[i].v > 8 && mineArray.children[i].innerHTML !== '🚩') ||
       // A cell without a bomb, that's not been clicked yet:
-      (m.children[i].v < 9 && !m.children[i].disabled)
+      (mineArray.children[i].v < 9 && !mineArray.children[i].disabled)
     ) {
       return; // Haven't won!
     }
@@ -133,7 +132,7 @@ const checkIfWon = () => {
   restartButton.innerHTML = '🤩';
 
   for (let i = 0; i < width * height; i++) {
-    m.children[i].disabled = true;
+    mineArray.children[i].disabled = true;
   }
 }
 
@@ -156,7 +155,7 @@ const flagCell = (button) => {
 }
 
 const revealCell = (x, y, initial) => {
-  const button = m.children[y * width + x];
+  const button = mineArray.children[y * width + x];
 
   if (x < 0 || x >= width || y < 0 || y >= height || button.disabled) return;
 
@@ -200,12 +199,12 @@ const revealCell = (x, y, initial) => {
     // Go through every button
     for (let i = 0; i < width * height; i++) {
       // Show all the bombs
-      if (m.children[i].v > 8) {
-        m.children[i].innerHTML = '💣';
+      if (mineArray.children[i].v > 8) {
+        mineArray.children[i].innerHTML = '💣';
       }
 
       // Disable all the buttons
-      m.children[i].disabled = true;
+      mineArray.children[i].disabled = true;
 
       // Set the restart button state
       // (done inside the for loop to save 2B)
@@ -219,8 +218,8 @@ const revealCell = (x, y, initial) => {
 }
 
 // Remove the default body margin
-b.style.cssText = `
-  margin: 0;
+minesweeper.style.cssText = `
+  margin: 2px; width:400px;
 `;
 
 // Controls container element is display: flex so button can be
@@ -243,11 +242,11 @@ restartButton.style.cssText = `
 
 // Width, height, and aspect ratio are inlined here, which saves lots of bytes,
 // as the default 9x9 board is `aspect-ration: 1` (same as restartButton).
-m.style.cssText = `
+mineArray.style.cssText = `
   margin: 1em;
-  max-width: 4in;
+  max-width: 6in;
   display: grid;
-  grid: repeat(${height},1fr)/repeat(${width},1fr);
+  grid: repeat(${height},3fr)/repeat(${width},1fr);
   aspect-ratio: ${width/height};
 `;
 
@@ -258,7 +257,7 @@ restartButton.onclick = start;
 controls.append(flagCountElement, restartButton);
 
 // Add the controls container and the game map/board to the document body
-b.append(controls, m);
+minesweeper.append(controls, mineArray);
 
 // Start the game for the first time
 start();

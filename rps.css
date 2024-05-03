@@ -1,0 +1,53 @@
+.game-container{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+.game-screen{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #1D2D44;
+    color: #F0EBD8;
+    padding: 20px 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px #748CAB;
+    width: 50%;
+    height: 500px;
+}
+#playerImage{
+    background-color: #FFF;
+    height:300px;
+    width:300px;
+    border-radius: 10px;
+}
+
+.rpsButton{
+    background-color: #F0EBD8;
+    border-color: rgba(0, 0, 0, 0);
+    padding: 10px 20px;
+    border-radius: 5px;
+    border-width: 3px;
+    margin-top: 0px;
+    cursor: pointer;
+    border-style: solid;
+}
+
+.rpsButton:hover{
+    border-color: rgba(0, 0, 0, 1);
+    background-color: #e8e164;
+}
+
+#rpsResultsBox{
+    display:flex;
+}
+
+#rpsPlayText{
+    margin-bottom:0px;
+}
+#rpsButtonBox{
+    margin-top: 5px;
+}
